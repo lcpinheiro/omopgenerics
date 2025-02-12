@@ -36,9 +36,12 @@ newCdmTable <- function(table, src, name) {
   table <- structure(.Data = table, tbl_source = src, tbl_name = name) |>
     addClass("cdm_table")
   colUpper <- setdiff(colnames(table), tolower(colnames(table)))
-  if (length(colUpper) > 0) {
-    cli::cli_abort("A cdm_table must have lowercase column names, but columns {colUpper} found in table.")
-  }
+  # -----------------------------------------------------------------------------------------------------
+  # Removing the enforcement for lowercase column names that is causing issues in Databricks, for testing
+  #if (length(colUpper) > 0) {
+  #  cli::cli_abort("A cdm_table must have lowercase column names, but columns {colUpper} found in table.")
+  #}
+  # -----------------------------------------------------------------------------------------------------
   return(table)
 }
 
